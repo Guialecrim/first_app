@@ -1,0 +1,39 @@
+from kivy.app import App
+from kivy.uix.button import Button
+from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.label import Label
+
+
+class MyApp(App):
+    def build(self):
+        # Layout principal (horizontal)
+        main_layout = BoxLayout(orientation='horizontal', spacing=5, padding=5)
+        
+        # Lado esquerdo: Label
+        left_layout = BoxLayout(orientation='vertical')
+        self.label = Label(text="Choose a screen")
+        left_layout.add_widget(self.label)
+        
+        # Lado direito: Botões empilhados verticalmente
+        right_layout = BoxLayout(orientation='vertical', spacing=5, padding=5)
+            
+        text_button = ['1','2','3','4']
+        for text in text_button:
+            btn = Button(text = text)
+            btn.bind(on_press = self.on_button_press)
+            right_layout.add_widget(btn)
+        
+        # Adiciona os dois layouts ao principal
+        main_layout.add_widget(left_layout)
+        main_layout.add_widget(right_layout)
+        
+        return main_layout
+
+    def on_button_press(self, instance):
+        #self.label.text = (f"You pressed button {instance.text}")
+        print(instance.text)
+
+
+# Executa o aplicativo
+app = MyApp()
+app.run()
